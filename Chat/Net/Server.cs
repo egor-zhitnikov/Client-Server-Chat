@@ -15,6 +15,8 @@ namespace Chat_Client.Net
         public PacketReader PacketReader;
 
         public event Action connectedEvent;
+        public event Action messageRecievedEvent;
+        public event Action userDisconnectEvent;
         public Server() 
         {
             _client = new TcpClient();
@@ -31,7 +33,7 @@ namespace Chat_Client.Net
                 {
                     var connectPacket = new PacketBuilder();
                     connectPacket.WriteOpCode(0);
-                    connectPacket.WriteString(username);
+                    connectPacket.WriteMessage(username);
                     _client.Client.Send(connectPacket.GetPacketBytes());
                 }
                 ReadPackets();
@@ -49,12 +51,27 @@ namespace Chat_Client.Net
                         case 1:
                             connectedEvent?.Invoke();
                             break;
+                        case 5:
+                            messageRecievedEvent?.Invoke();
+                            break;
+                        case 10:
+                            userDisconnectEvent?.Invoke();
+                            break;
                         default:
                             Console.WriteLine("Shit , here we go again");
                             break;
                     }
                 }
             });
+        }
+
+        public void SendMessageToServer(string message) 
+        {
+            var messagePacket = new PacketBuilder();
+            messagePacket.WriteOpCode(5);
+            messagePacket.WriteMessage(message);
+            _client.Client.Send(messagePacket.GetPacketBytes());
+
         }
     }
 }
