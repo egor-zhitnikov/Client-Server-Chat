@@ -23,7 +23,7 @@ namespace Chat_Server
                 var client = new Client(_listener.AcceptTcpClient());
                 _users.Add(client);
 
-                /*Broadcast the connection to everyone on the server*/
+                /*Broadcast the connection to everyne on the server*/
                 BroadcastConnection();
             }
             
