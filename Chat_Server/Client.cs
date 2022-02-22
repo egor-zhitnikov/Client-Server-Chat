@@ -28,7 +28,6 @@ namespace Chat_Server
 
             Task.Run(() => Process());
         }
-
         void Process() 
         {
             while (true) 
