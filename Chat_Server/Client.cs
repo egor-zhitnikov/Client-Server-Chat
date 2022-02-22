@@ -40,7 +40,6 @@ namespace Chat_Server
                     {
                         case 5:
                             var msg = _packetReader.ReadMessage();
-                            Program.BroadcastMessage(msg);
                             Console.WriteLine($"{DateTime.Now} Message: {msg}");
                             Program.BroadcastMessage($"[{DateTime.Now}]: [{Username}]: {msg}");
                             break;
@@ -51,7 +50,7 @@ namespace Chat_Server
                 }
                 catch (Exception)
                 {
-                    Console.WriteLine($"{UID.ToString()} Disconnected.");
+                    Console.WriteLine($"{Username} Disconnected.");
                     Program.BroadcastDisconnect(UID.ToString());
                     ClientSocket.Close();
                     break;

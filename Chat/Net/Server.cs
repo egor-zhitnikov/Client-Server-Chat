@@ -17,6 +17,7 @@ namespace Chat_Client.Net
         public event Action connectedEvent;
         public event Action messageRecievedEvent;
         public event Action userDisconnectEvent;
+
         public Server() 
         {
             _client = new TcpClient();
