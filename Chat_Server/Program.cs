@@ -15,7 +15,7 @@ namespace Chat_Server
         static void Main(string[] args)
         {
             _users = new List<Client>();
-            _listener = new TcpListener(IPAddress.Parse("127.0.0.1"),7891);
+            _listener = new TcpListener(IPAddress.Any,80);
             _listener.Start();
 
             while (true) 
@@ -26,11 +26,7 @@ namespace Chat_Server
                 /*Broadcast the connection to everyne on the server*/
                 BroadcastConnection();
             }
-            
-            
-
         }
-
         public static void BroadcastMessage(string message) 
         {
             foreach (var user in _users)
@@ -41,8 +37,6 @@ namespace Chat_Server
                 user.ClientSocket.Client.Send(msgPacket.GetPacketBytes());
             }
         }
-
-
         public static void BroadcastDisconnect(string uid)
         {
             var disconnectedUser = _users.Where(x => x.UID.ToString() == uid).FirstOrDefault();
@@ -57,7 +51,6 @@ namespace Chat_Server
 
             BroadcastMessage($"{disconnectedUser.Username} Disconnected.");
         }
-
         static void BroadcastConnection() 
         {
             foreach (var user in _users)
