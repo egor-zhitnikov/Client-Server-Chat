@@ -14,7 +14,6 @@ namespace Chat_Client.Net
         TcpClient _client;
         PacketBuilder _packetBuilder;
         public PacketReader PacketReader;
-
         public event Action connectedEvent;
         public event Action messageRecievedEvent;
         public event Action userDisconnectEvent;
@@ -24,11 +23,11 @@ namespace Chat_Client.Net
             _client = new TcpClient();
         }
 
-        public void ConnectToServer(string username) 
+        public void ConnectToServer(string username,string Ip) 
         {
             if (!_client.Connected) 
             {
-                IPEndPoint endpoint = new IPEndPoint(IPAddress.Parse("25.70.56.21"), 80);
+                IPEndPoint endpoint = new IPEndPoint(IPAddress.Parse(Ip), 80);
                 _client.Connect(endpoint);
                 PacketReader = new PacketReader(_client.GetStream());
 

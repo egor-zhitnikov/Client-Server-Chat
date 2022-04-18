@@ -18,13 +18,16 @@
         <DockPanel>
             <TextBox Height="25" 
                      DockPanel.Dock="Top"
-                     Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}"/>
+                     Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}" Width="167"/>
+            <TextBox Height="25" 
+                     DockPanel.Dock="Top"
+                     Text="{Binding Ip, UpdateSourceTrigger=PropertyChanged}" Width="167"/>
             <Button Height="25" 
-                    DockPanel.Dock="Top" 
+                     DockPanel.Dock="Top" 
                     Content="Connect"
-                    Command="{Binding ConnectToServerCommand}"/>
+                    Command="{Binding ConnectToServerCommand}" Click="Button_Click"/>
 
-            <ListView ItemsControl.ItemsSource="{Binding Users}">
+            <ListView ItemsControl.ItemsSource="{Binding Users}" Height="376" DockPanel.Dock="Right">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <TextBlock Text="{Binding Username}" />
