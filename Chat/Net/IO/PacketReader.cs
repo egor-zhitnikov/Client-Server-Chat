@@ -20,7 +20,7 @@ namespace Chat_Client.Net.IO
         public string ReadMessage()
         {
             byte[] msgBuffer;
-            var length = 128;
+            var length = ReadInt32();
             msgBuffer = new byte[length];
             _ns.Read(msgBuffer, 0, length);
 
