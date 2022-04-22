@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Chat" xmlns:viewmodel="clr-namespace:Chat_Client.MVVM.ViewModel"
         mc:Ignorable="d"
-        Title="MainWindow" Height="474" Width="816">
+        Title="MainWindow" Height="474" Width="816"
+        ResizeMode="NoResize">
     <Window.DataContext>
         <viewmodel:MainViewModel/>
     </Window.DataContext>
@@ -16,9 +17,21 @@
         </Grid.ColumnDefinitions>
 
         <DockPanel>
+            <Label
+                Height="25" 
+                DockPanel.Dock="Top"
+                Content="User Name" Width="167"
+                FontWeight="Bold"
+                />
             <TextBox Height="25" 
                      DockPanel.Dock="Top"
                      Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}" Width="167"/>
+            <Label
+                Height="25" 
+                DockPanel.Dock="Top"
+                Content="Server IP" Width="167"
+                FontWeight="Bold"
+                />
             <TextBox Height="25" 
                      DockPanel.Dock="Top"
                      Text="{Binding Ip, UpdateSourceTrigger=PropertyChanged}" Width="167"/>
