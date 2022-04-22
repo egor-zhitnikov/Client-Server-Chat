@@ -23,9 +23,9 @@ namespace Chat_Client.Net.IO
 
         public void WriteMessage(string msg) 
         {
-            var msgLength = msg.Length;
+            var msgLength = msg.Length*2;
             _ms.Write(BitConverter.GetBytes(msgLength));
-            _ms.Write(Encoding.UTF8.GetBytes(msg));
+            _ms.Write(Encoding.Default.GetBytes(msg));
         }
 
         public byte[] GetPacketBytes() 

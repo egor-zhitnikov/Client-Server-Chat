@@ -21,11 +21,11 @@ namespace Chat_Server.Net.IO
             _ms.WriteByte(opcode);
         }
 
-        public void WriteMessage(string msg)
+        public void WriteMessage(string msg,int messageLength)
         {
             var msgLength = msg.Length;
-            _ms.Write(BitConverter.GetBytes(msgLength));
-            _ms.Write(Encoding.UTF8.GetBytes(msg));
+            _ms.Write(BitConverter.GetBytes(msgLength+messageLength));
+            _ms.Write(Encoding.Default.GetBytes(msg));
         }
 
         public byte[] GetPacketBytes()

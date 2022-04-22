@@ -27,13 +27,13 @@ namespace Chat_Server
                 BroadcastConnection();
             }
         }
-        public static void BroadcastMessage(string message) 
+        public static void BroadcastMessage(string message,int messageLength) 
         {
             foreach (var user in _users)
             {
                 var msgPacket = new PacketBuilder();
                 msgPacket.WriteOpCode(5);
-                msgPacket.WriteMessage(message);
+                msgPacket.WriteMessage(message,messageLength);
                 user.ClientSocket.Client.Send(msgPacket.GetPacketBytes());
             }
         }
@@ -45,11 +45,11 @@ namespace Chat_Server
             {
                 var broadcastPacket = new PacketBuilder();
                 broadcastPacket.WriteOpCode(10);
-                broadcastPacket.WriteMessage(uid);
+                broadcastPacket.WriteMessage(uid,0);
                 user.ClientSocket.Client.Send(broadcastPacket.GetPacketBytes());
             }
 
-            BroadcastMessage($"{disconnectedUser.Username} Disconnected.");
+            BroadcastMessage($"{disconnectedUser.Username} Disconnected.",0);
         }
         static void BroadcastConnection() 
         {
@@ -59,8 +59,8 @@ namespace Chat_Server
                 {
                     var broadcastPacket = new PacketBuilder();
                     broadcastPacket.WriteOpCode(1);
-                    broadcastPacket.WriteMessage(usr.Username);
-                    broadcastPacket.WriteMessage(usr.UID.ToString());
+                    broadcastPacket.WriteMessage(usr.Username,0);
+                    broadcastPacket.WriteMessage(usr.UID.ToString(),0);
                     user.ClientSocket.Client.Send(broadcastPacket.GetPacketBytes());
                 }
             }

@@ -40,7 +40,7 @@ namespace Chat_Server
                         case 5:
                             var msg = _packetReader.ReadMessage();
                             Console.WriteLine($"{DateTime.Now} Message: {msg}");
-                            Program.BroadcastMessage($"[{DateTime.Now}]: [{Username}]: {msg}");
+                            Program.BroadcastMessage($"[{DateTime.Now}]: [{Username}]: {msg}",msg.Length);
                             break;
                         default:
 

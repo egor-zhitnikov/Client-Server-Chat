@@ -12,7 +12,6 @@ namespace Chat_Client.Net
     class Server
     {
         TcpClient _client;
-        PacketBuilder _packetBuilder;
         public PacketReader PacketReader;
         public event Action connectedEvent;
         public event Action messageRecievedEvent;
@@ -60,7 +59,7 @@ namespace Chat_Client.Net
                             userDisconnectEvent?.Invoke();
                             break;
                         default:
-                            Console.WriteLine("Shit , here we go again");
+
                             break;
                     }
                 }
