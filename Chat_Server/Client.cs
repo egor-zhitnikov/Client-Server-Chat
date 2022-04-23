@@ -30,6 +30,7 @@ namespace Chat_Server
         }
         void Process() 
         {
+            var nickname = new string(Username.Where(char.IsLetter).ToArray());
             while (true) 
             {
                 try
@@ -39,8 +40,8 @@ namespace Chat_Server
                     {
                         case 5:
                             var msg = _packetReader.ReadMessage();
-                            Console.WriteLine($"{DateTime.Now} Message: {msg}");
-                            Program.BroadcastMessage($"[{DateTime.Now}]: [{Username}]: {msg}",msg.Length);
+                            Console.WriteLine($"{DateTime.Now} [{nickname}] Message: {msg}");
+                            Program.BroadcastMessage($"[{DateTime.Now}]: [{nickname}]: {msg}",msg.Length);
                             break;
                         default:
 
@@ -49,7 +50,7 @@ namespace Chat_Server
                 }
                 catch (Exception)
                 {
-                    Console.WriteLine($"{Username} Disconnected.");
+                    Console.WriteLine($"{nickname} Disconnected.");
                     Program.BroadcastDisconnect(UID.ToString());
                     ClientSocket.Close();
                     break;

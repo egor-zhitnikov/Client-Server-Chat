@@ -49,7 +49,7 @@ namespace Chat_Server
                 user.ClientSocket.Client.Send(broadcastPacket.GetPacketBytes());
             }
 
-            BroadcastMessage($"{disconnectedUser.Username} Disconnected.",0);
+            BroadcastMessage($" Disconnected.",0);
         }
         static void BroadcastConnection() 
         {
